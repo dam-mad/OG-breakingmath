@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Breaking Math</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/lavish-bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+      body {
+          background-size: 100% 100%;
+          background-image: url(images/background.png);
+          background-repeat: no-repeat;
+    background-attachment: fixed;
+      }
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #000;
+        color: #bbb;
+      padding: 25px;
+    }
+
+    .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      min-height: 200px;
+    }
+
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+      .carousel-caption {
+        display: none; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+        <a class="navbar-brand" href="#">Breaking Math</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+                    <li><a style="background-color: #EA4606; color: #efe;" href="subscribe.html">Subscribe</a></li>
+                              <li><a href="http://www.facebook.com/BreakingMathPodcast/">Facebook Page</a></li>
+
+          <li><a href="https://anchor.fm/breakingmathpodcast">Episodes</a></li>
+                  <li><a href="applets.html">Applets</a></li>
+<li class="active"><a href="hypercube.html">Hypercube</a></li>
+        <li><a href="papers.html">Papers</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gameoflife.html">Game of Life</a></li>
+        <li><a href="#">Generation Listen</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+<!--        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+        <div class="container">
+                    <div class="row">
+<h1>This is an interactive hypercube</h1>
+
+    <h3>This is a simulation of an N-dimensional hypercube. The default number of dimensions is four.</h3>
+    <h2> Try these controls: </h2>
+                <ul>
+                    <li><b>Click</b> to change the color mode.</li>
+                    <li><b>Up arrow</b> increases the number of dimensions.</li>
+                    <li><b>Down arrow</b> decreases the number of dimensions.</li>
+                    <li><b>Left arrow</b> and <b>right arrow</b> budge the cube</li>
+                    <li><b>Pressing "i"</b> changes the color mode</li>
+                    <li><b>Pressing "r"</b> jitters the corners of the cube</li>
+                    <li><b>Pressing "enter"</b> changes the direction that the cube rotates</li>
+                    <li><b>Pressing "spacebar"</b> toggles the trails</li>
+                </ul>
+    </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <canvas style="width: 60vw; height: 60vw;" width="1000" height="1000" id="mycanvas"></canvas>
+            </div>
+        </div>
+        </div>
+<script>
+    var canvas = document.getElementById("mycanvas");
+var context = canvas.getContext("2d");
+
+var invert = false;
+var frame = 0;
+function clrscrn(p) {
+  context.fillStyle = invert ? "rgba(255,255,255," + p + ")" : "rgba(0,0,0," + p + ")";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+var c = 0;
+var crazy = 0;
+var nlines = 4;
+var nfaces = 4;
+
+var polyct = 0;
+function drawpoly(xys) {
+  var hsv = [polyct / nfaces, .2, 1];
+  nfaces++;
+  var rgb = rgbtohsv(hsv);
+  var r = rgb[0];
+  var g = rgb[1];
+  var b = rgb[2];
+  context.fillStyle = 'rgba('+r+','+g+','+b+','+.5+')';
+//context.fillStyle = invert ? 'rgba(0,0,0,' + (1 - Math.pow(.97, Math.pow(2, 1 - ndims))) + ')' : 'rgba(255,255,255,' + (1 - Math.pow(.9, Math.pow(2, 1 - ndims))) + ')';
+  context.moveTo(xys[0][0], xys[0][1]);
+  for (var i = 1; i < xys.length; ++i) {
+    context.lineTo(xys[i][0], xys[i][1]);
+  }
+  context.closePath();
+  context.fill();
+}
+
+function drawpolyn(xyzws) {
+  drawpoly(xyzws.map(xntoxy));
+}
+
+// Convert RGB to HSV
+function rgbtohsv(rgb){
+    r = rgb[0]/255, g = rgb[1]/255, b = rgb[2]/255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, v = max;
+
+        var d = max - min;
+    s = max == 0 ? 0 : d / max;
+
+        if(max == min){
+        h = 0; // achromatic
+    }else{
+        switch(max){
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+        return [h, s, v];
+}
+
+// convert HSV to RGB
+function hsvtorgb(hsv){
+    var h = hsv[0];
+    var s = hsv[1];
+    var v = hsv[2];
+    var r, g, b;
+
+        var i = Math.floor(h * 6);
+    var f = h * 6 - i;
+    var p = v * (1 - s);
+    var q = v * (1 - f * s);
+    var t = v * (1 - (1 - f) * s);
+
+        switch(i % 6){
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+
+        return [Math.floor(r * 255.9), Math.floor(g * 255.9), Math.floor(b * 255.9)];
+}
+
+// Shift the hue of an rgb color
+function hueshift(rgb,amt) {
+  var hsv = rgbtohsv(rgb);
+  hsv = hueshifthsv(hsv,amt);
+  return hsvtorgb(hsv);
+}
+
+function hueshifthsv(hsv,amt) {
+  var hue = hsv[0] + amt;
+  if(hue < 0) {
+    hue += 1 + -Math.floor(hue);
+  }
+  hsv[0] = hue % 1;
+  return hsv
+}
+
+function drawline(x, y, xx, yy) {
+  var d = c;
+  var r; var g; var b;
+  var hsv;
+  if(crazy) {
+    if(!invert) {
+      hsv = [.5,.2,1];
+    } else {
+      hsv = [0,0,0];
+    }
+  } else {
+    hsv = hueshifthsv([c / (nlines),.7+.3*Math.sin(frame/100),1],(frame%200)/200);
+  }
+  c = (c + 1) % (nlines);
+  
+  if (invert) {
+    hsv = hueshifthsv(hsv,.5);
+    hsv[2] = .6;
+  }
+  
+  var rgb = hsvtorgb(hsv);
+  if(invert && crazy) {
+    r = g = b = 0;
+  } else {
+    r=rgb[0];g=rgb[1];b=rgb[2];
+  } 
+
+
+  context.strokeStyle = c === 0 ? "rgba(" + r + "," + g + "," + b + ",1i)" :
+    "rgba(" + r + "," + g + "," + b + ",.8)";
+  context.beginPath();
+  context.moveTo(x, y);
+  context.lineTo(xx, yy);
+  context.stroke();
+}
+
+var pixel = context.createImageData(canvas.width, canvas.height);
+var pixeldata = pixel.data;
+
+// Just in case.
+function drawPixel(x, y, c) {
+  c = Math.floor(c);
+  if (c < lifeBoundary) {
+    r = 0;
+    g = 0;
+    b = Math.floor(255 / lifeBoundary * c);
+  } else {
+    r = 255;
+    g = c;
+    b = Math.floor((c / 255) * (c));
+  }
+  var offset = (canvas.width * y + x) << 2;
+  pixeldata[offset] = r;
+  pixeldata[offset + 1] = g;
+  pixeldata[offset + 2] = b;
+  pixeldata[offset + 3] = 255;
+}
+
+var woffset = 2.75;
+var zoffset = 2.75;
+var poffset = 2.75;
+var xscale = -1;
+var yscale = -1;
+var xoffset = canvas.width / 2;
+var yoffset = canvas.height / 2;
+
+function makecube(n) {
+  var points = [
+    [-1],
+    [1]
+  ];
+  var lines = [
+    [0, 1]
+  ];
+  var faces = [];
+  var c = 0;
+
+    function appendpoints(pt, n) {
+    return pt.concat(n);
+  }
+  while (c < n - 1) {
+    c++;
+    var plen = points.length;
+    var llen = lines.length;
+    faces = faces.concat(faces.map(function(face) {
+      return face.map(function(ptidx) {
+        return ptidx + plen;
+      });
+    }));
+    faces = faces.concat(lines.map(function(line) {
+      return line.slice().concat(line.map(function(ptidx) {
+        return ptidx + plen;
+      }).reverse());
+    }));
+    latterpoints = points.slice();
+    points = points.map(function(x) {
+      return appendpoints(x, -1);
+    });
+    latterpoints = latterpoints.map(function(x) {
+      return appendpoints(x, 1);
+    });
+    points = points.concat(latterpoints);
+    lines = lines.concat(lines.slice().map(function(x) {
+      return [x[0] + plen, x[1] + plen];
+    }));
+    for (var i = 0; i < plen; ++i) {
+      lines.push([i, i + plen]);
+    }
+  }
+  return [points, lines, faces];
+}
+
+// Literally a zero matrix
+function zeromat(x, y) {
+  var r = new Array(y);
+  for (var i = 0; i < y; ++i) {
+    r[i] = new Array(x);
+    for (var j = 0; j < x; ++j) {
+      r[i][j] = 0;
+    }
+  }
+  return r;
+}
+
+// Creates an identity matrix nxn
+function idmat(n) {
+  var i = 0;
+  return Array.apply(null, Array(n)).map(function() {
+    var row = Array.apply(null, Array(n)).map(function() {
+      return 0;
+    });
+    row[i++] = 1;
+    return row;
+  });
+}
+
+
+// Weighted average between matrices M1 and M2
+function wamatrix(m1,m2,w) {
+  var r = new Array(m1.length);
+  for(var i=0;i<m1.length;++i) {
+    r[i] = new Array(m1[0].length);
+    for(var j=0;j<m1[0].length;++j) {
+      r[i][j] = m1[i][j] * (1-w)+ m2[i][j] * w;
+    }
+  }
+  return r;
+}
+
+// A rotation matrix between axes 1 and 2 (n dimensions), by theta
+function rotatemat(theta, axis1, axis2, n) {
+  var sin = Math.sin(theta);
+  var cos = Math.cos(theta);
+  var mat = zeromat(n, n);
+  for (var i = 0; i < n; ++i) {
+    mat[i][i] = 1;
+  }
+  mat[axis1][axis1] = cos;
+  mat[axis1][axis2] = -sin;
+  mat[axis2][axis1] = sin;
+  mat[axis2][axis2] = cos;
+  return mat;
+}
+
+// Mutiplies two matrices
+function matmatmul(mata, matb) {
+  var y = mata.length;
+  var x = matb[0].length;
+  var z = matb.length;
+  var r = new Array(y);
+  for (var i = 0; i < y; ++i) {
+    r[i] = new Array(x);
+    for (var j = 0; j < x; ++j) {
+      var sum = 0;
+      for (var k = 0; k < z; ++k) {
+        sum += mata[i][k] * matb[k][j];
+      }
+      r[i][j] = sum;
+    }
+  }
+  return r;
+}
+
+// Multiplies a matrix by a vector
+function matvecmul(mat, vec) {
+  var y = mat.length;
+  var x = mat[0].length;
+  var r = new Array(y);
+  for (var i = 0; i < y; ++i) {
+    var sum = 0;
+    for (var j = 0; j < x; ++j) {
+      sum += mat[i][j] * vec[j];
+    }
+    r[i] = sum;
+  }
+  return r;
+}
+
+// Draw a line in n dimensions (on a 2d projection of course)
+function drawlinen(xyzetc, xyzetc1) {
+  var start = xntoxy(xyzetc);
+  var end = xntoxy(xyzetc1);
+  return drawline.apply(this, start.concat(end));
+}
+
+// Convert an n-dimensional point to its 2d "shadow"
+function xntoxy(xyetc) {
+  xyetc = xyetc.slice(); // make a copy
+  for (var i = xyetc.length - 1; i >= 2; --i) {
+    var w = xyetc[i] + poffset;
+    for (var j = 0; j <= i; ++j) {
+      xyetc[j] /= w;
+    }
+  }
+  var x = xyetc[0];
+  var y = xyetc[1];
+  x = x * xscale + xoffset;
+  y = y * yscale + yoffset;
+  return [Math.floor(x), Math.floor(y)];
+}
+
+var ndims = 2;                  // Number of dims to "start" with.
+var newndims = 4;               // Number of dims we really start with
+var hypershape = 0;             // A non-unidentified hypershape holder
+var hspoints = 0;               // The points in the shape
+var hslines = 0;                // The lines in the shape
+var hsfaces = 0;                // The faces in the shape
+var mousex = -1;                // Mouse control stuff (for later)
+var mousey = -1;
+var mouseon = false;
+var changeAction = false;       // Is the rotation matrix changing?
+var lastDownTarget = canvas;    // For clicking.
+var keyupcode = 38;             // For keyboard commands
+var keydowncode = 40;
+var keyleftcode = 37;
+var keyrightcode = 39;
+var entercode = 13;
+var code0 = 48;
+var code1 = 49;
+var code2 = 50;
+var code3 = 51;
+var code4 = 52;
+var code5 = 53;
+var code6 = 54;
+var code7 = 55;
+var code8 = 55;
+var code9 = 56;
+var fcode = 70;
+var icode = 73;
+var rcode = 82;
+var spacecode = 32;
+var delta = 0;                  // For moving around the cube              
+var trails = false;             // Do we leave a ton of trails?
+var ffill = false;              // Fill in the faces? (IGNORED)
+
+// For making sure we have the attention for the right clicking
+document.addEventListener('mousedown', function(e) {
+  lastDownTarget = e.target;
+}, false);
+
+// Keyboard stuff
+document.addEventListener('keydown', function(e) {
+  if (lastDownTarget == canvas) {
+    if (e.keyCode === keyupcode) {
+      newndims = ndims + 1;
+      if(e.target == document.body) { e.preventDefault(); }
+    } else
+    if (e.keyCode === keyrightcode) {
+      delta = .1;
+      if(e.target == document.body) { e.preventDefault(); }
+    } else
+    if (e.keyCode === keyleftcode) {
+      delta = -.1;
+      if(e.target == document.body) { e.preventDefault(); }
+    } else
+    if (e.keyCode === keydowncode) {
+      newndims = ndims == 2 ? 2 : ndims - 1;
+      if(e.target == document.body) { e.preventDefault(); }
+    } else
+    if (e.keyCode === spacecode) {
+      trails = !trails;
+      if(e.target == document.body) { e.preventDefault(); }
+    } else
+    if (e.keyCode === fcode) {
+      ffill = !ffill;
+    } else
+    if (e.keyCode === icode) {
+      invert = !invert;
+      clrscrn(1);
+    } else
+    if (e.keyCode === rcode) {
+      jitter = true;
+    } else
+    if (e.keyCode === entercode) {
+        changeAction = true;
+    }
+  }
+}, false);
+
+// Clicking stuff. Changes the "craziness" of the colors
+canvas.addEventListener('click', function(e) {
+  crazy = 1 - crazy;
+}, false);
+
+// Right-clicking stuff initiates a change in rotation
+canvas.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  changeAction = true;
+  return false;
+}, false);
+
+// More custodial code
+canvas.addEventListener('mouseover', function(e) {
+  mouseon = true;
+}, false);
+
+// For future stuff
+canvas.addEventListener('mousemove', function(e) {
+  var rect = canvas.getBoundingClientRect();
+  mousex = e.clientX - rect.left;
+  mousey = e.clientY - rect.top;
+}, false);
+
+var M1;   // Rotation matrix 1
+var M2;   // and 2
+var m1;   // m1[0] and m1[1], like m2, are where M1 and M2
+var m2;   // store their chosen axes.
+var M;    // and their product
+var ramt = 0.03;  // In radians how much per frame we rotate
+var turn = 0;     // M2's turn to change?
+var lasti = Math.floor(Math.random()*newndims);     // Rotation axes. Stored so
+var lastj = Math.floor(Math.random()*(newndims-1)); // that change happens
+// Make sure we're not doing anything meaningless
+if(lastj>=lasti) {
+  lastj++;
+}
+// Save the last two so that we can't have the matrices doing the same thing
+var llasti = -1;
+var llasti = -1;
+var jitter = false; // Ready to shake up the points
+M1 = idmat(ndims);
+M2 = idmat(ndims);
+M = matmatmul(M1, M2);
+R = idmat(ndims);
+
+// Just in case. PLF = points, lines, and faces in a dim-dimensional
+// hypercube
+function getPLFnumbers(dim) {
+  var p = 1;
+  var l = 0;
+  var f = 0;
+  while (dim--) {
+    p <<= 1;
+    l = (l << 1) + p;
+    f = (f << 1) + l;
+  }
+  return [p, l, f];
+}
+
+// Exclusive OR
+function xor(a,b) {
+    return (a || b) && !(a && b);
+}
+
+// Change a size of a matrix by truncating or plopping it in the upper-left
+// hand corner of an ID matrix
+function matresize(mat, oldsize, newsize) {
+  if (oldsize < newsize) {
+    mat = mat.map(function(row) {
+      return row.concat(Array.apply(null, Array(newsize - oldsize)).map(function() {
+        return 0;
+      }));
+    });
+    var i = oldsize;
+    mat = mat.concat(Array.apply(null, Array(newsize - oldsize)).map(function() {
+      var row = Array.apply(null, Array(newsize)).map(function() {
+        return 0;
+      }); i
+      row[i++] = 1;
+      return row;
+    }));
+  } else if (newsize < oldsize) {
+    mat = mat.slice(0, newsize).map(function(row) {
+      return row.slice(0, newsize);
+    });
+  }
+  return mat;
+}
+
+var speed = 0.01;              // our initial velocity (ignored save when slowing)
+var dspeed = 0.06;           // change in velocity when slowing
+var slowingdown = false;    // are we slowing down?
+var speedingup = true;     // ... speeding up?
+var finallyChange = false;  // Change after slowing down.
+var changeCounter = 0;
+
+clrscrn(1); // Before we begin
+setInterval(function() {
+  if (ndims != newndims) { // If we change the cube, change it
+    hypershape = makecube(newndims);
+    hspoints = hypershape[0];
+    hslines = hypershape[1];
+    nlines = hslines.length;
+    hsfaces = hypershape[2];
+    nfaces = hsfaces.length;
+    M1 = idmat(newndims);
+    var i = lasti;
+    var j = lastj;
+    if (i >= newndims) {
+      if (j >= newndims) {
+        i = Math.floor(Math.random() * ndims);
+        j = Math.floor(Math.random() * (ndims - 1));
+        if (j >= i) {
+          ++j;
+        }
+      } else {
+        i = Math.floor(Math.random() * (ndims - 1));
+        if (i >= j) {
+          ++i;
+        }
+      }
+    } else if (j >= newndims) {
+      j = Math.floor(Math.random() * (ndims - 1));
+      
+      if (j >= i) {
+        ++j;
+      }
+    }
+    turn = 1;
+    M2 = rotatemat(ramt, i, j, newndims);
+    M = M2;
+    m2 = [i,j];
+    R = idmat(newndims);
+    ndims = newndims;
+    var s = Math.pow(poffset, ndims);
+    xscale = canvas.width * .01 * s;
+    yscale = canvas.height * .01 * s;
+  }
+  if (delta) {
+    for (var i = 0; i < hspoints.length; ++i) {
+      for (var j = 0; j < ndims; ++j) {
+        hspoints[i][j] += delta;
+      }
+    }
+    delta = 0;
+  }
+  if (invert && !trails) {
+    clrscrn(1);
+  }
+  else if (!trails) {
+    clrscrn(.1);
+  }
+  if((!(changeCounter % 250) && !trails ) || changeAction) {
+        changeCounter = 0;
+    slowingdown = true;
+    speedingup = false;
+    changeAction = false;
+    finallyChange = false;
+  }
+  if(slowingdown) {
+    speed -= dspeed;
+  } else if(speedingup) {
+    speed += dspeed;
+  }
+  if(speed < 0) {
+    speed = 0;
+    speedingup = true;
+    slowingdown = false;
+    finallyChange = true;
+  }
+  if(speed > 1) {
+    speedingup = false;
+    slowingdown = false;
+    speed = 1;
+  }
+  if (finallyChange) {
+    changeAction = false;
+    finallyChange = false;
+    var i;
+    var j;
+    do {
+      i = Math.floor(Math.random() * ndims);
+      j = Math.floor(Math.random() * (ndims - 1));
+      if (j >= i) {
+        ++j;
+      }
+      if (turn) {
+        M1 = rotatemat(ramt, i, j, ndims);
+        m1 = [i,j];
+      } else {
+        M2 = rotatemat(ramt, i, j, ndims);
+        m2 = [i,j];
+      }
+      M = matmatmul(M1, M2);
+      turn = 1 - turn;
+    } while (((i === lasti && j === lastj) ||
+        (j === lasti && i === lastj) ||
+        (i === llasti && j === llastj) ||
+        (j === llasti && i === llastj)) && ndims > 2);
+    llasti = lasti;
+    llastj = lastj;
+    lasti = i;
+    lastj = j;
+  }
+  
+  for (var i = 0; i < hslines.length; ++i) {
+    drawlinen(
+      matvecmul(R, hspoints[hslines[i][0]]),
+      matvecmul(R, hspoints[hslines[i][1]]));
+  }i
+  if (ffill && false) {
+    for (var i = 0; i < hsfaces.length; ++i) {
+      drawpolyn(hsfaces[i].map(function(idx) {
+        return matvecmul(R, hspoints[idx]);
+      }));
+    }
+  }
+  if(jitter) {
+    jitter = !jitter;
+    hspoints =
+    hspoints.map(function(point) {
+      return point.map(function(coord) {
+        return coord+Math.random()*.1-.05;
+      });
+    });r
+  }
+  if(slowingdown || speedingup) {
+    if(xor(turn,speedingup)) {
+      M = matmatmul(M1,rotatemat(ramt*speed,m2[0],m2[1],ndims));
+    } else {
+      M = matmatmul(rotatemat(ramt*speed,m1[0],m1[1],ndims),M2);
+    }
+  }
+  R = matmatmul(M,R);
+  frame++; // Increment frame counter for cool effects
+  if(!trails) {
+  	changeCounter++;
+  }
+}, 25);</script>
+
+</body>
+</html>
+

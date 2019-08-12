@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Breaking Math</title>
+    <meta property="og:sitename" content="Breaking Math Podcast">
+    <meta property="og:title" content="Breaking Math is a podcast that, even though it's not about math, you don't have to get math to get it.">
+    <meta property="og:description" content="Breaking Math is a podcast that aims to be academic and accessible at the same time. It's designed for people who love learning, science, math, and any type of knowledge.">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="http://breakingmathpodcast.com/blog.html">
+    <meta property="og:type" content="article">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/lavish-bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    body {
+        background-size: 100% 100%;
+        background-image: url(images/background.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    /* Add a gray background color and some padding to the footer */
+    
+    footer {
+        background-color: #000;
+        color: #bbb;
+        padding: 25px;
+    }
+    
+    .carousel-inner img {
+        width: 100%;
+        /* Set width to 100% */
+        min-height: 200px;
+    }
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    
+    @media (max-width: 600px) {
+        .carousel-caption {
+            display: none;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=403512070026298";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Breaking Math</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a style="background-color: #EA4606; color: #efe;" href="subscribe.html">Subscribe</a></li>
+                    <li><a href="http://www.facebook.com/BreakingMathPodcast/">Facebook Page</a></li>
+                    <li><a href="https://anchor.fm/breakingmathpodcast">Episodes</a></li>
+                    <li><a href="applets.html">Applets</a></li>
+                    <li><a href="hypercube.html">Hypercube</a></li>
+                    <li><a href="papers.html">Papers</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="active"><a href="blog.html">Blog</a></li>
+                    <li><a href="#">Generation Listen</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h1>Blog</h1>
+                <p>Check out the latest posts by <a href="#jonathan">Jonathan Baca</a> or <a href="#gabriel">Gabriel Hesch</a>, and find out what's up with <b>Breaking Math</b>!</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div align="right"> April 4th, 2017</div>
+        <hr>
+        <div class="col-sm-12">
+            <h1>QED? <b>Prove it.</b></h1>
+            <img class="thumbnail" src="images/QEDProveIt.png">
+            <p><i>Download the episode for <a href="https://itunes.apple.com/us/podcast/7-qed-prove-it/id1201114838?i=1000383773573&mt=2">iTunes</a>, <a href="https://soundcloud.com/breakingmathpodcast/7-qed-prove-it">Soundcloud</a>, or <a href="https://play.google.com/music/m/Ddwi4lz4uhyvqshrmhtm3eqcb5q?t=7_QED_Prove_it-Breaking_Math_Podcast">Google Play</a>.</i></p>
+            <p><i>We will start off this week’s episode with a nice flowery intro (the kind that Jonathan is now famous for). Comparing an episode to a meal? Too much cheese? That is for you to decide. And be wrong about. But without further ado, bon appetit.
+                </i></p>
+            <img class="thumbnail" width="50%" src="images/fancyFood.jpg">
+            <h3>Jonathan’s Flowery Intro</h3>
+            <p>
+                Proofs are sometimes seen as an exercise in tedium, other times as a pure form of beauty, and often as both. But from time immemorial, people have been using mathematics to demonstrate new theorems, and advance the state of the art of mathematics. However, it is only relatively recently, within the last 3,000 years, that the art of mathematical proof has been considered essential to the study of mathematics. Mathematicians constantly fight over what constitutes a proof, and even what makes a proof valid, partially because proof requires delicate insight. So what is the art of mathematical proof? How has it changed? And who can do it?</p>
+            <p><i>Then, for a first course, we will discuss what proofs are and get into a quite meaty section of the podcast.</i></p>
+            <h3> What are proofs?</h3>
+            <p>Amy brings up the uncountability of the Cantor set. In brief, the Cantor set is what happens when you take a line from 0 to 1, cut out the middle third, cut out the middle third of the lines that remain, and so on. It is illustrated here:</p>
+            <img src="images/cantor0.gif" />
+            <p>The proof only necessitates some basic outside the box thinking, and a wonderful walkthrough of the proof can be found <a href="https://www.maths.tcd.ie/~levene/221/pdf/cantor.pdf">here</a></p>
+            <p><span class="glyphicon glyphicons-info-sign"></span><i>The proof in the link also requires knowing base-3. Here's what base-3 is: instead of having ten digits (0, 1, 2, 3, 4, 5, 6, 7, 8, and 9), you have three (0, 1, and 2). So when you're counting, you go 0, 1, 2, 10, 11, 12, 20, 21, 22, 100, 101, and so on. Decimals work the same way. In base-3 (or ternary), 0.12 is not 1 10th plus 2 100ths, but 1 3rd plus 2 9ths (9 being 3 times 3). This continues indefinitely. It also contains a variant of the diagonalization argument, which is discussed on the podcast.</i></p>
+            <p> The proof that the difference of two odd numbers' squares is divisible by four follows simply: first write down your two odd numbers $n$ and $m$. Next, write them as $n=2a+1$ and $m=2b+1$. You can do this with all odd numbers, and this is in fact one definition of "odd numberiness". Next, write out:
+                <br> Take \(n^2 - m^2\)
+                <br> Substituting, we get \((2a+1)^2 - (2b+1)^2\)
+                <br> Expanding, we get $4a^2 + 4a + 1 - 4b^2 + 4b + 1$
+                <br> Factoring and cancelling, we get $4(a^2 + a - b^2 - b)$
+                <br> Let $k = a^2 + a - b^2 - b$
+                <br> And summarizing, we see that $n^2 - m^2 = 4k$
+                <br> And since $k$ is an integer, what we needed to have proven has been proven. Try it out! $3^2-1^2=9-1=8=4\cdot 2$, $141^2 - 89^2 = 19881 - 7921 = 11960 = 4 \cdot 2990$, etc.
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                Proof that \(2+2=4\)! You can skip over this if analysis isn't your jam. First what you do is you make a few assumptions (known together as the axiomatic foundations of Peano arithmetic):</p>
+            <ol>
+                <li>\(0\) is a <i>natural number</i></li>
+                <li>For every natural number $x$, $x=x$.</li>
+                <li>For every trio of natural numbers $x,y,z$, if $x=y$, and $y=z$, then $x=z$.</li>
+                <li>For all $a$ and $b$, if $a=b$ and $a$ is a natural number, then so is $b$.</li>
+                <li>We denote the <b>successor</b> of a natural number $S(n)$ and claim that for all natural numbers $x$, $S(x)$ is a natural number.</li>
+                <li>For all natural numbers $n$ and $m$, then $n=m$ only if $S(n)=S(m)$.</li>
+                <li>For all natural numbers $n$, $S(n)$ is false. That is to say, there is no natural number less than zero.</li>
+            </ol>
+            We also make a couple of assumptions about the nature of arithmetic:
+            <ul>
+                <li>$n+0=n$</li>
+                <li>$n+S(m)=S(n+m)$</li>
+            </ul>
+            And finally, we define:
+            <ul>
+                <li>$1=S(0)$</li>
+                <li>$2=S(1)$</li>
+                <li>$3=S(2)$</li>
+                <li>$4=S(3)$</li>
+            </ul>
+            The first thing we need to do is prove a property about addition. Namely, that $S(n)+m=S(n+m)$. This is markedly different than our assumption (remember, we don't know yet that $a+b=b+a$). So how do we do this? Induction! We prove it for the 0th case of $m$:
+            <ul>
+                <li>$S(n)+0$</li>
+                <li>$=S(n)$</li>
+                <li>$=S(n+0)$</li>
+            </ul>
+            Then we show that the $m^{th}$ case leads by natural extensionto the $(m+1)^{st}$ case:
+            <ul>
+                <li>$S(n)+m = S(n+m)$</li>
+                <li>$S(n) + S(m) = S(S(n)+m)$</li>
+                <li>$S(n) + S(m) = S(S(n+m))$</li>
+                <li>$S(n) + S(m) = S(n+S(m))$</li>
+            </ul>
+            And so therefore it is proven for all natural numbers (sometimes induction is given as a Peano axiom).
+            <p>
+                The next step is to show that $n+0=n$. We do this much in the same fashion:</p>
+            <ul>
+                <li>$0+0=0$</li>
+                <li>$n+0=n$</li>
+                <li>$S(n+0)=S(n)$</li>
+                <li>$S(n)+0=S(n)$</li>
+            </ul>
+            Finally, we show that $n+m=m+n$:
+            <ul>
+                <li>$n+0=0+n$</li>
+                <li>$n=0+n$</li>
+                <li>$n=n$</li>
+                <li>$n+m=m+n$</li>
+                <li>$S(n+m)=S(m+n)$</li>
+                <li>$n+S(m)=S(m+n)$</li>
+                <li>$n+S(m)=S(m)+n$</li>
+            </ul>
+            And now for the proof that $2+2=4$:
+            <ul>
+                <li>$2+2$</li>
+                <li>$=S(1)+S(1)$</li>
+                <li>$=S(S(0))+S(S(0))$</li>
+                <li>$=S(S(S(0))+S(0))$</li>
+                <li>$=S(S(S(S(0))+0))$</li>
+                <li>$=S(S(S(S(0))))$</li>
+                <li>$=S(S(S(1)))$</li>
+                <li>$=S(S(2))$</li>
+                <li>$=S(3)$</li>
+                <li>$=4$</li>
+            </ul>
+            <p>(Sure, it didn't require all that showing that $n+m=m+n$, but that was fun, <i>right?</i>)</p>
+        </div>
+        <div class="col-sm-6">
+            <img class="thumbnail" src="images/gabesleeping.png">
+        </div>
+        <div class="col-sm-12">
+            <h3>What are Axioms?</h3>
+            <p>
+                An axiom is an assumption, in some sense, that is made without giving heed to whether or not it should be assumed or not. It is a basic assumption that cannot be assumed further, in a sense. It’s sort of like the atoms of math.
+            </p>
+            <p>
+                Some interesting facts about axioms:
+                <ul>
+                    <li>One of Euclid’s postulates (old-timey for “axioms”) was that all right angles are congruent. That’s to say that they’re the same. Very basic, right? Euclid himself actually wrote an entire book about proofs, which was different than many of his Chinese and Indian contemporaries in that, instead of just showing example after example, it had a proof that would work for every example.</li>
+                    <li>There are whole fields of study dedicated to axioms in math (called the study of axiomatic systems).
+                    </li>
+                    <li>The “and” proposition is an example of something that we do without questioning. The “and” proposition takes two inputs and generates one output (think of it like a sink with two holes and one drain). When one of the inputs is false, then the entire output is false. However, when one of the inputs is true, then the output is whatver the other one may be (true or false). This is an example of a very basic proposition (we use it all the time: “I am a person <i>and</i> I am writing), but we give little thought to its validity because, in part, it’s arguable that we have <i>no way of knowing how to quantify that</i>.</li>
+                </ul>
+            </p>
+            <p>
+                There, of course, are several types of proofs:
+                <ul>
+                    <li><b>Inductive</b>
+                        <br/>This is the “domino” proof. We call it that because if you know an infinite number of dominos are stacked up, you can prove that they all fall inductively by showing only that the first domino will knock down the next domino, and that a domino toppling over its neighbor will cause its neighbor to topple down its neighbor in turn.</li>
+                    <li><b>Contradiction</b>
+                        <br/>This is done by making one assumption that’s incorrect, and showing that, by using correct steps around it, that we arrive at a conclusion we know is incorrect, and assume the opposite. An example of this sort of proof is like saying “all teachers make teachers look bad”, showing an example of a teacher who isn’t a bad teacher, and therefore does not make teachers look bad (and thus arrive at a contradiction), and therefore assume that the original statement’s logical opposite (“some teachers make teachers look good”) is true.</li>
+                    <li><b>Contrapositive</b>
+                        <br/>This is done by assuming the opposite of what you want to prove, and showing that by assuming that, you end up with the opposite of what you already know. An example of this is like trying to show that “I am good, therefore, I deserve to go to the fair”, assuming the opposite of what you’re trying to prove (“I do not deserve to go to the fair”), and then reasoning your way back to the opposite of what you already know (“Since I do not deserve to go to the fair, I must not be good.”).</li>
+                    <li><b>Direct</b>
+                        <br/>Typically the hardest type of proof, this is done by showing direct, logical, steps from point A to point Z.</li>
+                </ul>
+            </p>
+            <h3>Where Proofs Come From</h3>
+            <p>We already covered Euclid, but we did not really cover the necessity that facilitated the invention of mathematical proofs. Proofs are useful because they give us, in some sense, an infinite amount of information (or at least very perfect information) from things that we already know to be true. One source of inspiration that mathematicians have is in looking for patterns. For example, if there is a case that can be labelled “0”, and a case that can be labelled “1”, the next logical step for many mathematicians to take is to try to dream up a scenario where “&#8734;” shows up. Guest Amy points out that it is frustrating that proofs are not generally taught in such a way that introduce one to the actual underpinnings of mathematics; many assume, throughout their whole schooling, that mathematics is something left to “loftier” minds, whatever they may be. Proofs are foundational to our entire way of life. It was in doing proofs about stars, for example, that physics was born (through Kepler and Newton).
+            </p>
+            <h3>Proof of Controversy</h3>
+            <p>Or controveries in proof. Before we cover real controversies, we’re going to cover <i>pseudo</i>-controversies. That is to say, we’re going to cover something that many people have a hard time believing, but are consistent with all the rules of mathematical reasoning. One proof is that $0.999\ldots=1$. No not is almost one; is one. The proof is simple, and takes no longer than a sentence or two: $\frac23=0.666\ldots$, and $\frac13=0.333\ldots$. $3+6=9$, so $\frac13+\frac23=1=0.999\ldots$. That’s it! Read that over a few times to convince yourself of it.</p>
+            <p>Another harder-to-believe problem that is fraught with unnecessary controversy is the Monte Hall Problem. The problem is as follows: you have three doors before you. You know that behind two of the doors is a goat, and behind the other is a car, but you don’t know which one is which. The host lets you choose a door, and then opens one door, revealing a goat. He then asks you if you want to switch doors. Should you? The answer is “yes”, but there are plenty of resources online for learning why. Try it out on your own! And try to prove it without resorting to exhaustive search (that is to say, without trying all three, nine, twenty-seven, etc. combinations). And don't fret if you don't get it right the first few times; there were PhD statisticians who argued against the correct answer for weeks!
+            </p>
+            <p>We will touch on Paul Erd&#337;s before we continue. He had a problem with one of the most famous proofs of the Monte Hall Problem because it wasn't elegant enough. Paul Erd&#337;s is one of the most prolific mathematicians (edging out even Euler), who lived an itinerant lifestyle; he went from couch to couch, only stopping for as long as it took for him to collaborate on a paper. He was highly influential int the mathematical community, and his opinion is (in general) well respected.</p>
+            <p>
+                Sometimes, however, mathematics has shown itself to be overly complicated or even contradictory. Take, for example, the parallel postulate. Euclid’s five postulates, mentioned earlier, are here in full:
+                <ol>
+                    <ul>A straight line connects two points</ul>
+                    <ul>Any straight line segment can be continued indefinitely in a straight line</ul>
+                    <ul>Given any straight line segment a circle can be drawn with its center at one end and its edge touching the other</ul>
+                    <ul>All right angles are the same</ul>
+                    <ul>If two lines intersect a third such that the two inner angles on one side is less than two right angles, then those lines will eventually intersect</ul>
+                </ol>
+                The fifth postulate is obviously a lot more complex than the rest. And this bothered Euclid to the point where he refused to use it unless it was absolutely necessary. Many mathematicians after him tried to prove the fifth with the fourth, but tried in vain. It was only after a few millennia that the study of <i>non-Euclidean geometry</i> was established.
+            </p>
+            <p>
+                To put it briefly, imagine the globe as it exists now. If you were to draw a triangle on the ground, you would have basically a triangle with 180 degrees of inner angles. Expand it, however, and the lines would start to curve around the earth (this is using the definition of the line as being the shortest distance between two points, which on the earth is known as the <i>great sphere</i>). Expand it to the point where you have a triangle that is "stretched" along the equator (or square, or n-gon), and you have anywhere from 540 degrees to a triangle, or 900 degrees for a pentagon, to an arbitrarily high number of degrees for an n-gon (180n, to be precise). With a saddle shape, you'd get the opposite phenomena. Please note that euclidean geometry still works in three dimensions, but not in <i>intrinsically curved two dimensional surfaces embedded in more than two dimensions</i> (or n dimensions really). A surface is intrinsically curved if a flat sheet of paper cannot be "crumpled" into that shape. For example, the globe: you cannot really fold a globe (without crossover, etc) out of a single sheet of paper.
+            </p>
+            <p>
+                Another controversial part of mathematics is set theory. A set is like a bucket full of things where those things can also be other sets (buckets). There's an axiom called the "axiom of choice" which basically states that, given a number of sets, you can choose an element out of every set and make a new set with it. Taking the axiom of choice, however obvious as it may seem to mathematicians, is not without due diligence. Taking the axiom of choice, for example, can lead to the Banach-Tarski paradox. An excellent explantion can be found <a href="https://www.youtube.com/watch?v=s86-Z-CbaHA">here</a>, but its premise will be given here breifly.
+    </p>
+    <img class="thumbnail" width="50%" src="images/banach0.png">
+    <p>Imagine you have a cube. You then cut it up in to an infinite number of little pieces. Then, by just rearranging the pieces, you somehow wind up with twice as many spheres as you started out with (nuts, right? check out the video). Another paradox that comes out of using elementary set theory is in definining the "set of all sets that do not contain themselves" and asking the question "does such a set contain itself?" If it does, then it doesn't (because it only contains sets which do not contain themselves), and if it doesn't it does (because it <i>only contains sets which do not contain themselves</i>). You can avoid these paradoxes with certain types of set theory such as ZFC, but these were not invented (or discovered) until much later.
+            </p>
+            <p>
+                What all these have in common are <i>paradigm shifts</i>. For example, set theory <i>itself</i> was paradigm-shifting in just causing mathematicians to think outside of their rulers and circles. Imaginary numbers were paradigm shifting for a mind that could only think of the real numbers. Etc., etc., etc.
+            </p>
+            <h3>A Challenge for You All</h3>
+            <p>Here is a challenge. Suppose you have a triangle set up like this:</p>
+            <img class="thumbnail" src="images/triangleProof0.png">
+            <p>Suppose you know that $BAC=BCA$ (that is to say, that the triangle is isoceles). Can you show that this is a direct and necessary result of $CD=AE$ if $EAC=DCA=\frac12BAC$? It took us a while, but we're going to give you a little hint. Suppose you keep the angle the same, but increase the cross-section, and keep the sides of the isoceles the same. Look what happens to $B$ (which is at the midpoint of $A$ and $C$ on the first diagram)</p>
+            <img class="thumbnail" width="100%" src="images/triangleProof1.png"/>
+            </div>
+        </div>
+        <div class="col-sm-12" style="background-color: white">
+            <h1 style="color: black;">Comments:</h1>
+            <div class="fb-comments" data-href="http://www.breakingmathpodcast.com/blogQED.html" data-numposts="25"></div>
+        </div>
+        <div class="row">
+            <div class="jumbotron">
+                <h1>Older Posts</h1>
+                <p>Click <a href="blogOld.html">here</a> for older posts.</p>
+            </div>
+        </div>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} });
+        </script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+</body>

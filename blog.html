@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+  <title>Breaking Math</title>
+  
+    <meta property="og:sitename" content="Breaking Math Podcast">
+    <meta property="og:title" content="Breaking Math is a podcast that, even though it's not about math, you don't have to get math to get it.">
+    <meta property="og:description" content="Breaking Math is a podcast that aims to be academic and accessible at the same time. It's designed for people who love learning, science, math, and any type of knowledge.">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="http://breakingmathpodcast.com/">
+    <meta property="og:type" content="profile">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/lavish-bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+      body {
+          background-size: 100% 100%;
+          background-image: url(images/background.png);
+          background-repeat: no-repeat;
+    background-attachment: fixed;
+      }
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #000;
+        color: #bbb;
+      padding: 25px;
+    }
+
+    .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      min-height: 200px;
+    }
+
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+      .carousel-caption {
+        display: none; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+        <a class="navbar-brand" href="#">Breaking Math</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+                    <li><a style="background-color: #EA7D06; color: #efe;" href="subscribe.html">Subscribe</a></li>
+                              <li><a href="http://www.facebook.com/BreakingMathPodcast/">Facebook Page</a></li>
+
+          <li><a href="https://anchor.fm/breakingmathpodcast">Episodes</a></li>
+                  <li><a href="applets.html">Applets</a></li>
+<li><a href="hypercube.html">Hypercube</a></li>
+        <li><a href="papers.html">Papers</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="gameoflife.html">Game of Life</a></li>
+        <li><a href="#">Generation Listen</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+<!--        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<div class="row">
+    <div class="col-sm-6">
+        <div>
+            <canvas id="mycanvas" width="500" height="500"></canvas>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h2>Game of Life on a Klein Bottle</h2>
+        <p>
+            This is a simulation of John Conway's game of life on the surface of
+            a klein bottle. A klein bottle is a shape that you can only embed
+            without intersections in a minimum of four dimensions, and is what
+            happens when you take two Môbius strips (to make a Möbius strip you
+            take a belt or something similar, make a loop out of it, but with
+            a half turn in it so that when you run your finger along the surface
+            of the strip, you go around twice (but on opposite ``sides'' each
+            time) on the strip's <i>one side</i> to return to the original
+            location). The game of life is an example of a <b>cellular
+            automata</b>, and it has these rules:
+        </p>
+        <ul>
+            <li>A cell is either <b>alive</b> or <b>dead</b>.</li>
+            <li>A cell with exactly two living neighbors (neighbors are up,
+            down, left, right, and the diagonals from a cell on a square grid)
+            does not change in the next generation.
+            </li>
+            <li>A cell with exactly three living neighbors is alive in the next
+            generation.</li>
+            <li>Any other number of neighbors, and the cell is dead in the
+            next generation.</li>
+        </ul>
+        <p>In this simulation, cells which are alive in the current generation
+        are white, and then if they turn off they turn blue and then fade to
+        black. Cells which alive for many generations in a row, however, turn
+        red after a while.</p>
+    </div>
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Copyright 2016</p>
+</footer>
+<script>
+    var canvas = document.getElementById("mycanvas");
+var context = canvas.getContext("2d");
+
+var frame = 0;
+
+function clrscrn() {
+  context.fillStyle = "black";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+var pixel = context.createImageData(canvas.width, canvas.height);
+var pixeldata = pixel.data;
+
+var lifeBoundary = 72;
+// Draw a pixel at x,y with Life Value c
+function drawPixel(x, y, c) {
+  c = Math.floor(c);
+  if (c < lifeBoundary) {
+    r = 0;
+    g = 0;
+    b = Math.floor(255 / lifeBoundary * c);
+  } else {
+    r = 255;
+    g = c;
+    b = Math.floor((c / 255) * (c));
+  }
+  var offset = (canvas.width * y + x) << 2;
+  pixeldata[offset] = r;
+  pixeldata[offset + 1] = g;
+  pixeldata[offset + 2] = b;
+  pixeldata[offset + 3] = 255;
+}
+
+// Return a 2d array with all values set to value
+function array2d(x, y, value) {
+  var r = new Array(y);
+  for (var i = 0; i < y; ++i) {
+    r[i] = new Array(x);
+    for (var j = 0; j < x; ++j) {
+      r[j] = new Array(y);
+    }
+  }
+  return r;
+}
+
+// Create two boards
+var board = [array2d(canvas.width, canvas.height, 0), array2d(canvas.width, canvas.height, 0)];
+
+// Which board are we drawing?
+var boardnum = 0;
+
+// Set initial pixel data to Black
+for (var i = 0; i < canvas.height * canvas.width * 4; i += 4) {
+  pixeldata[i] = 0;
+  pixeldata[i + 1] = 0;
+  pixeldata[i + 2] = 0;
+  pixeldata[i + 3] = 255
+}
+
+// Set a bunch of random living points
+for (var i = 0; i < canvas.height; ++i) {
+  for (var j = 0; j < canvas.width; ++j) {
+    board[boardnum][i][j] = Math.random() < .25 ? 255 : 0;
+  }
+}
+
+// Which generation?
+generation = 0;
+
+// Flip the board (for the edges)
+var flip = function(x) {
+  return canvas.height - x - 1;
+};
+var id = function(x) {
+  return x;
+};
+
+// Do this over and over again
+setInterval(function() {
+  // Draw the universe
+    context.putImageData(pixel, 0, 0);
+  context.font = '20px sans-serif';
+  context.fillStyle = 'rgba(255,255,255,' + (Math.sin(generation / 20) * .25 + .6) + ')';
+  context.fillText(generation++, 5, 20);
+  // Go through it all
+  for (var i = 0; i < canvas.height; ++i) {
+    for (var j = 0; j < canvas.width; ++j) {
+      drawPixel(j, i, board[boardnum][i][j]);
+      // Set up boundaries
+      var im = i - 1;
+      var ip = i + 1;
+      var jm = j - 1;
+      var jp = j + 1;
+      var fm;
+      var fp;
+      fm = fp = id;
+      if (im === -1) {
+        im = canvas.height - 1;
+      } else if (ip === canvas.height) {
+        ip = 0;
+      }
+      if (jm === -1) {
+        jm = canvas.width - 1;
+        fm = flip;
+      } else if (jp === canvas.width) {
+        jp = 0;
+        fp = flip;
+      }
+
+      // Count living neighbors
+      var n = (board[boardnum][fm(im)][jm] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][fm(i)][jm] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][fm(ip)][jm] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][im][j] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][ip][j] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][fp(im)][jp] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][fp(i)][jp] >= lifeBoundary ? 1 : 0) +
+        (board[boardnum][fp(ip)][jp] >= lifeBoundary ? 1 : 0);
+      // Amount of color decay
+      var amt = .7;
+      var amt2 = .3;
+      if (n == 2 && board[boardnum][i][j] >= lifeBoundary) {
+        board[1 - boardnum][i][j] = board[boardnum][i][j] - amt < lifeBoundary ? lifeBoundary : board[boardnum][i][j] - amt;
+      } else if (n == 3) {
+        if (board[boardnum][i][j] >= lifeBoundary) {
+          board[1 - boardnum][i][j] = board[boardnum][i][j] - amt < lifeBoundary ? lifeBoundary : board[boardnum][i][j] - amt;
+        } else {
+          board[1 - boardnum][i][j] = 255;
+        }
+      } else {
+        if (board[boardnum][i][j] >= lifeBoundary) {
+          board[1 - boardnum][i][j] = lifeBoundary-.1;
+        } else {
+          board[1 - boardnum][i][j] = board[boardnum][i][j] - amt2 < 0 ? 0 : board[boardnum][i][j] - amt2;
+        }
+      }
+    }
+  }
+  // "Flip" the boards
+  boardnum = 1 - boardnum;
+}, lifeBoundary);
+</script>
+</body>
+</html>

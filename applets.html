@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Breaking Math</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" href="css/lavish-bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      .modal-header {
+        background-color: #000;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        min-height: 16.42857px;
+      }
+      
+      .modal-header .close {
+        margin-top: -2px;
+      }
+      
+      .modal-title {
+        margin: 0;
+        line-height: 1.42857;
+      }
+      
+      .modal-body {
+        background-color: #061924;
+        position: relative;
+        padding: 15px;
+      }
+      
+      .modal-footer {
+        background-color: #123d55;
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+      }
+      
+      .modal-footer:before,
+      .modal-footer:after {
+        content: " ";
+        display: table;
+      }
+      
+      .modal-footer:after {
+        clear: both;
+      }
+      
+      .modal-footer .btn + .btn {
+        margin-left: 5px;
+        margin-bottom: 0;
+      }
+      
+      .modal-footer .btn-group .btn + .btn {
+        margin-left: -1px;
+      }
+      
+      .modal-footer .btn-block + .btn-block {
+        margin-left: 0;
+      }
+      
+      body {
+        background-size: 100% 100%;
+        background-image: url(images/background.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      /* Add a gray background color and some padding to the footer */
+      
+      footer {
+        background-color: #000;
+        color: #bbb;
+        padding: 25px;
+      }
+      
+      .carousel-inner img {
+        width: 100%;
+        /* Set width to 100% */
+        min-height: 200px;
+      }
+      /* Hide the carousel text when the screen is less than 600 pixels wide */
+      
+      @media (max-width: 600px) {
+        .carousel-caption {
+          display: none;
+        }
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Modal -->
+    <div id="sierpinskimodal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">The Sierpinski Triangle</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <canvas id="sierpinskiCanvas" width="250" height="250" style="border:1px solid #fff;">
+                  Your browser cannot load this demo.
+                </canvas>
+              </div>
+              <div class="col-sm-6">
+                <p>Everyone who has spent more than a few minutes doodling in class knows what the Sierpinski triangle. What they might not know, however, is that this fractal has zero area and infinite "perimeter".</p>
+                <p>What you see here is quite simple: a point is chosen at random, and then one of three things happens: it gets shrunken down into a square on the bottom left, it gets shrunken down into a square on the bottom right, or it get shrunken down
+                  into a square on the top (imagine a very crude pyramid made of three blocks within a larger block). Amazingly enough, that makes the Sierpinski triangle.</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--/Modal-->
+
+
+    <!-- Modal -->
+    <div id="lorenzmodal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">The Lorenz Attractor</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <canvas id="lorenzCanvas" width="250" height="250" style="border:1px solid #fff;">
+                  Your browser cannot load this demo.
+                </canvas>
+              </div>
+              <div class="col-sm-6">
+                <p>The Lorenz attractor was initially designed as a toy weather model; one so simple that there was no guarantee that it had anything to do with the weather. For example, this model makes the assumption that all weather is the same at all
+                  places (more or less).</p>
+                <p>Still, however, with this simplistic model, the initial sensitivity on initial conditions, and a new kind of science was born. People are still instriguied to watch the attractor go around and around.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--/Modal-->
+      
+    <!-- Modal -->
+    <div id="fouriermodal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Fourier Sequences</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <canvas id="fourierCanvas" width="250" height="250" style="border:1px solid #fff;">
+                  Your browser cannot load this demo.
+                </canvas>
+                  <button onclick="minus()" id="minus" class="btn btn-default">Less</button>
+<button onclick="plus()" id="plus" class="btn btn-default">More</button>
+
+              </div>
+              <div class="col-sm-6">
+                <p>The Lorenz attractor was initially designed as a toy weather model; one so simple that there was no guarantee that it had anything to do with the weather. For example, this model makes the assumption that all weather is the same at all
+                  places (more or less).</p>
+                <p>Still, however, with this simplistic model, the initial sensitivity on initial conditions, and a new kind of science was born. People are still instriguied to watch the attractor go around and around.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" onclick="closefourier()" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--/Modal-->
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Breaking Math</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a style="background-color: #EA4606; color: #efe;" href="subscribe.html">Subscribe</a></li>
+            <li><a href="http://www.facebook.com/BreakingMathPodcast/">Facebook Page</a></li>
+
+            <li><a href="https://soundcloud.com/breakingmathpodcast">Episodes</a></li>
+              <li><a href="hypercube.html">Hypercube</a></li>
+            <li class="active"><a href="applets.html">Applets</a></li>
+            <li><a href="papers.html">Papers</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="gameoflife.html">Game of Life</a></li>
+            <li><a href="#">Generation Listen</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <!--        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="jumbotron">
+          <h1>Live Demo<?php echo('nstration');?>s</h1>
+          <p>Here you'll find some cool live demos of stuff that we've put together for your viewing pleasure!</p>
+        </div>
+        <div class="row">
+            
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img width="85%" src="images/applets/sierpinski.png" alt="Sierpinski Demo">
+              <div class="caption">
+                <h3>Sierpinski Triangle</h3>
+                <p>Check out how a Sierpinski triangle can be generated using a very simple set of rules.</p>
+                <p>
+                  <button onclick="sierpinksi();" type="button" class="btn btn-primary" data-toggle="modal" data-target="#sierpinskimodal">Open Modal</button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img width="85%" src="images/applets/lorenz.png" alt="Lorenz Demo">
+              <div class="caption">
+                <h3>Lorenz Attractor</h3>
+                <p>Watch the Lorenz attractor loop around and around and demonstrate the butterfly effect in one of its purest forms.
+                </p>
+                <p>
+                  <button onclick="lorenz();" type="button" class="btn btn-primary" data-toggle="modal" data-target="#lorenzmodal">Open Modal</button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img width="85%" src="images/applets/fourier.png" alt="Fourier Sequence Demo">
+              <div class="caption">
+                <h3>Fourier Sequence</h3>
+                <p>Look at how a Fourier sequence actually works.</p>
+                <p>
+                  <button onclick="fourier();" type="button" class="btn btn-primary" data-toggle="modal" data-target="#fouriermodal">Open Modal</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+  </body>
+  <script src="js/demos.js"></script>
+
+</html>
