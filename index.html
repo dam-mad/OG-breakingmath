@@ -1,184 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Breaking Math</title>
-  <meta charset="utf-8">
-    <meta property="og:sitename" content="Breaking Math Podcast">
-    <meta property="og:title" content="Breaking Math is a podcast that, even though it's not about math, you don't have to get math to get it.">
-    <meta property="og:description" content="Breaking Math is a podcast that aims to be academic and accessible at the same time. It's designed for people who love learning, science, math, and any type of knowledge.">
-    <meta property="og:image" content="images/logo.png">
-    <meta property="og:url" content="http://breakingmathpodcast.com/">
-    <meta property="og:type" content="profile">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <title>Breaking Math</title>
+    <meta charset="utf-8" />
+    <meta property="og:sitename" content="Breaking Math Podcast" />
+    <meta
+      property="og:title"
+      content="Breaking Math is a podcast that, even though it's not about math, you don't have to get math to get it."
+    />
+    <meta
+      property="og:description"
+      content="Breaking Math is a podcast that aims to be academic and accessible at the same time. It's designed for people who love learning, science, math, and any type of knowledge."
+    />
+    <meta property="og:image" content="images/logo.png" />
+    <meta property="og:url" content="http://breakingmathpodcast.com/" />
+    <meta property="og:type" content="profile" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="css/lavish-bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
+    <link rel="stylesheet" href="css/lavish-bootstrap.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.14.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.14.2/firebase-analytics.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <style>
       body {
-          background-size: 100% 100%;
-          background-image: url(images/background.png);
-          background-repeat: no-repeat;
-    background-attachment: fixed;
+        background-size: 100% 100%;
+        background-image: url(images/background.png);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
       }
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #000;
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #000;
         color: #bbb;
-      padding: 25px;
-    }
-
-    .carousel-inner img {
-      width: 100%; /* Set width to 100% */
-      min-height: 200px;
-    }
-
-    /* Hide the carousel text when the screen is less than 600 pixels wide */
-    @media (max-width: 600px) {
-      .carousel-caption {
-        display: none; 
+        padding: 25px;
       }
-    }
-  </style>
-</head>
-<body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-        <a class="navbar-brand" href="#">Breaking Math</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="index.html">Home</a></li>
-                    <li><a style="background-color: #EA7D06; color: #efe;" href="subscribe.html">Subscribe</a></li>
-                              <li><a href="http://www.facebook.com/BreakingMathPodcast/">Facebook Page</a></li>
+      .carousel-inner img {
+        width: 100%; /* Set width to 100% */
+        min-height: 200px;
+      }
 
-          <li><a href="https://anchor.fm/breakingmathpodcast">Episodes</a></li>
-                  <li><a href="applets.html">Applets</a></li>
-<li><a href="hypercube.html">Hypercube</a></li>
-        <li><a href="papers.html">Papers</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="gameoflife.html">Game of Life</a></li>
-        <li><a href="#">Generation Listen</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-<!--        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-<div class="row">
-    
-    <div class="col-sm-6">
-    <div class="well">
-        <h3> Welcome to Breaking Math!</h3>
-      <p>Here at Breaking Math, we don't try to give you
-        concepts we think you can't handle just to make
-        ourselves feel smart. We get that math is hard for
-        a lot of people, and our episodes are designed to
-        accomodate that. For the more mathematically minded
-        of you, however, we don't skimp on the math, and even
-        have write-ups to go with every episode.</p>
-    </div>
-    <div class="well">
-                <h4> <b>Episode:</b> Forbidden Formulas</h4>
-       <p>Why is mathematics so hard? Our answer is simple:
-        it is, and always has been, jealously guarded as
-        an elite skill. What does this mean, and what can
-        we do about it? To find out, listen <a>here</a>.</p>
-    </div>
-    <div class="well">
-<h4> <b>Blog Post:</b> Bon Voyage</h4>
-       <p>Who are we, what are we doing, what is KUNM, and
-           what does it have to do with you? Check it out
-           <a>here</a>.</p>    </div>
-  </div>
-    
-  <div class="col-sm-6">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img width="100%" src="images/logo.png">
-          <div class="carousel-caption">
-          </div>      
+      /* Hide the carousel text when the screen is less than 600 pixels wide */
+      @media (max-width: 600px) {
+        .carousel-caption {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Breaking Math</a>
         </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li>
+              <a
+                style="background-color: #ea7d06; color: #efe;"
+                href="subscribe.html"
+                >Subscribe</a
+              >
+            </li>
+            <li>
+              <a href="http://www.facebook.com/BreakingMathPodcast/"
+                >Facebook Page</a
+              >
+            </li>
 
-        <div class="item">
-          <img width="100%" src="images/carousel0.png">
+            <li>
+              <a href="https://anchor.fm/breakingmathpodcast">Episodes</a>
+            </li>
+            <li><a href="applets.html">Applets</a></li>
+            <li><a href="hypercube.html">Hypercube</a></li>
+            <li><a href="papers.html">Papers</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="gameoflife.html">Game of Life</a></li>
+            <li><a href="#">Generation Listen</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <!--        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+          </ul>
         </div>
       </div>
+    </nav>
 
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+            <h3>Welcome to Breaking Math!</h3>
+            <p>
+              Here at Breaking Math, we don't try to give you concepts we think
+              you can't handle just to make ourselves feel smart. We get that
+              math is hard for a lot of people, and our episodes are designed to
+              accomodate that. For the more mathematically minded of you,
+              however, we don't skimp on the math, and even have write-ups to go
+              with every episode.
+            </p>
+          </div>
+          <div class="well">
+            <h4><b>Episode:</b> Forbidden Formulas</h4>
+            <p>
+              Why is mathematics so hard? Our answer is simple: it is, and
+              always has been, jealously guarded as an elite skill. What does
+              this mean, and what can we do about it? To find out, listen
+              <a>here</a>.
+            </p>
+          </div>
+          <div class="well">
+            <h4><b>Blog Post:</b> Bon Voyage</h4>
+            <p>
+              Who are we, what are we doing, what is KUNM, and what does it have
+              to do with you? Check it out <a>here</a>.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li
+                data-target="#myCarousel"
+                data-slide-to="0"
+                class="active"
+              ></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img width="100%" src="images/logo.png" />
+                <div class="carousel-caption"></div>
+              </div>
+
+              <div class="item">
+                <img width="100%" src="images/carousel0.png" />
+              </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a
+              class="left carousel-control"
+              href="#myCarousel"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="glyphicon glyphicon-chevron-left"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="right carousel-control"
+              href="#myCarousel"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                class="glyphicon glyphicon-chevron-right"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <hr />
     </div>
-  </div>
-  
-</div>
-<hr>
-</div>
 
-<div class="container text-center">    
-  <h3>Recent episodes</h3>
-  <br>
-  <div class="row">
-    <div class="col-sm-3">
-      <img src="images/forbiddenformulas.png" class="img-responsive" style="width:100%" alt="Image">
-        <p>Why is mathematics so hard? It's because it's useful. Find out more <a href="soundcloud.com/breakingmathpodcast">here</a></p>
+    <div class="container text-center">
+      <h3>Recent episodes</h3>
+      <br />
+      <div class="row">
+        <div class="col-sm-3">
+          <img
+            src="images/forbiddenformulas.png"
+            class="img-responsive"
+            style="width: 100%;"
+            alt="Image"
+          />
+          <p>
+            Why is mathematics so hard? It's because it's useful. Find out more
+            <a href="soundcloud.com/breakingmathpodcast">here</a>
+          </p>
+        </div>
+        <div class="col-sm-3">
+          <img
+            src="images/wreakingchaos.png"
+            class="img-responsive"
+            style="width: 100%;"
+            alt="Image"
+          />
+          <p>
+            What can we learn about chaos from the weather? And what does it
+            have to do with fractals? Find out more
+            <a href="soundcloud.com/breakingmathpodcast">here</a>
+          </p>
+        </div>
+        <div class="col-sm-3">
+          <img
+            src="images/tmi.png"
+            class="img-responsive"
+            style="width: 100%;"
+            alt="Image"
+          />
+          <p>
+            What is information theory? And why is it relevant to your life?
+            Find out more <a href="soundcloud.com/breakingmathpodcast">here</a>
+          </p>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h3>More episodes coming soon!</h3>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-3">
-      <img src="images/wreakingchaos.png" class="img-responsive" style="width:100%" alt="Image">
-        <p>What can we learn about chaos from the weather? And what does it have to do with fractals? Find out more <a href="soundcloud.com/breakingmathpodcast">here</a></p>
-      </div>
-      <div class="col-sm-3">
-      <img src="images/tmi.png" class="img-responsive" style="width:100%" alt="Image">
-        <p>What is information theory? And why is it relevant to your life? Find out more <a href="soundcloud.com/breakingmathpodcast">here</a></p>
-      </div>
-    <div class="col-sm-3">
-      <div class="well">
-       <h3>More episodes coming soon!</h3>
-      </div>
-    </div>  
-  </div>
-  <hr>
-</div>
+      <hr />
+    </div>
 
-<div class="container text-center">    
-  <h3>Our Partners</h3>
-  <br>
-  <div class="row">
-    <div class="well">
-       <h3>Partner podcast links coming soon!</h3>
+    <div class="container text-center">
+      <h3>Our Partners</h3>
+      <br />
+      <div class="row">
+        <div class="well">
+          <h3>Partner podcast links coming soon!</h3>
+        </div>
       </div>
-  </div>
-</div><br>
+    </div>
+    <br />
 
-<footer class="container-fluid text-center">
-  <p>Copyright 2016</p>
-</footer>
-
-</body>
+    <footer class="container-fluid text-center">
+      <p>Copyright 2016</p>
+    </footer>
+  </body>
 </html>
